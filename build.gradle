@@ -17,6 +17,10 @@ dependencies { //프로젝트를 개발하며 필요한 기능의 의존성을 �
 //    testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation 'org.springframework.boot:spring-boot-starter-web' //웹관련 기능을 제공
     testImplementation 'org.springframework.boot:spring-boot-starter-test' //테스트 기능 제공
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa' //스프링 데이터 JPA : 스프링 부트용 JPA
+    runtimeOnly 'com.h2database:h2'//인메모리 데이터베이스 H2 : 로컬 환경, 테스트 환경에서 사용
+    compileOnly 'org.projectlombok:lombok'// 롬복 : 반복 메서드 작성을 줄여주는 라이브러리
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
 test {
