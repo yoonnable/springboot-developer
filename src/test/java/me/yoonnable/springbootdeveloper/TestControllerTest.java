@@ -1,5 +1,7 @@
-package me.yoonnable.springbootdeveloper;
+package me.yoonnable.intro;
 
+import me.yoonnable.intro.Member;
+import me.yoonnable.intro.MemberRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +19,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest // 메인 애플리케이션 클래스에 추가하는 애너테이션인 @SpringBootApplication이 있는 클래스를 찾고 그 클래스에 포함되어있는 빈을 찾은 다음, 테스트용 애플리케이션 컨택스트 생성
     @AutoConfigureMockMvc // MockMvc(애플리케이션을 서버에 배포하지 않고도 테스트용 MVC 환경을 만들어 요청, 전송, 응답 기능을 제공하는 유틸리티 클래스) 생성 및 자동 구성
 class TestControllerTest {
