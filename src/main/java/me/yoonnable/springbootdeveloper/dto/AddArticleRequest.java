@@ -8,7 +8,7 @@ import me.yoonnable.springbootdeveloper.domain.Article;
 @NoArgsConstructor //기본 생성자 추가
 @AllArgsConstructor // 모든 필드값을 파라미터로 받는 생성자 추가
 @Getter
-public class AddArticleRequest {
+public class AddArticleRequest { // 서비스에서 요청을 받을 객체
 
     private String title;
     private String content;

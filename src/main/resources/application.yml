@@ -8,3 +8,11 @@ Spring:
 
     # 애플리케이션을 실행할 때 테이블을 생성하고 data.sql 파일에 있는 쿼리를 실행하도록 하는 옵션
     defer-datasource-initialization: true
+
+  # 실제 데이터를 확인하기 위해 H2 콘솔 활성화
+  datasource:
+    url: jdbc:h2:mem:testdb
+
+  h2:
+    console:
+      enabled: true
