@@ -3,13 +3,18 @@ package me.yoonnable.springbootdeveloper.controller;
 import lombok.RequiredArgsConstructor;
 import me.yoonnable.springbootdeveloper.domain.Article;
 import me.yoonnable.springbootdeveloper.dto.AddArticleRequest;
+import me.yoonnable.springbootdeveloper.dto.ArticleResponse;
 import me.yoonnable.springbootdeveloper.repository.BlogRepository;
 import me.yoonnable.springbootdeveloper.service.BlogService;
+import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController // HTTP Response Body에 객체 데이터를 JSON 형식으로 반환하는 컨트롤러
@@ -25,5 +30,15 @@ public class BlogApiController {
         return ResponseEntity.status(HttpStatus.CREATED) // 응답코드 201로 Created를 응답하고 테이블에 저장된 객체를 반환
                 .body(saveArticle);
     }
+    
+    @GetMapping("/api/articles")
+    public ResponseEntity<List<ArticleResponse>> findAllArticle() {
+        List<ArticleResponse> articles = blogService.findAll()
+                .stream()
+                .map(ArticleResponse::new) // 앞에 stream 안에 있는 Article 객체들을 ArticleResponse의 생성자를 이용해 파싱
+                .toList();
 
+        return ResponseEntity.ok()
+                .body(articles);
+    }
 }
