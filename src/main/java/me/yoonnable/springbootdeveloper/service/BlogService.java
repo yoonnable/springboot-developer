@@ -19,7 +19,20 @@ public class BlogService {
         return blogRepository.save(request.toEntity());
     }
 
+    //블로그 글 목록 조회 메서드
     public List<Article> findAll() {
         return blogRepository.findAll();
+    }
+
+    //블로그 글 조회 메서드
+    public Article findById(long id) {
+        return blogRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+        //id로 엔티티를 조회하고 없으면 IllegalArgumentException 예외를 발생시킨다.
+    }
+
+    //블로그 글 삭제 메서드
+    public void delete(long id) {
+        blogRepository.deleteById(id);
     }
 }
