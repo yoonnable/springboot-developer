@@ -3,6 +3,7 @@ package me.yoonnable.springbootdeveloper.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.yoonnable.springbootdeveloper.domain.Article;
 import me.yoonnable.springbootdeveloper.dto.AddArticleRequest;
+import me.yoonnable.springbootdeveloper.dto.UpdateArticleRequest;
 import me.yoonnable.springbootdeveloper.repository.BlogRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -150,5 +151,37 @@ class BlogApiControllerTest {
         List<Article> articles = blogRepository.findAll();
 
         assertThat(articles).isEmpty();
+    }
+
+    @DisplayName("updateArticle: 블로그 글 수정에 성공한다.")
+    @Test
+    public void updateArticle() throws Exception {
+        //given : 블로그 글을 저장하고, 블로그 글 수정에 필요한 요청 객체를 만듭니다.
+        final String url = "/api/articles/{id}";
+        final String title = "title";
+        final String content = "content";
+
+        Article savedArticle = blogRepository.save(Article.builder()
+                .title(title)
+                .content(content)
+                .build());
+
+        final String newTitle = "new title";
+        final String newContent = "new content";
+
+        UpdateArticleRequest request = new UpdateArticleRequest(newTitle, newContent);
+
+        //when : UDATE API로 수정 요청을 보냅니다. 이때 요청 타입은 JSON이며, given절에서 미리 만들어둔 객체를 요청 본문으로 함께 보냅니다.
+        ResultActions result = mockMvc.perform(put(url, savedArticle.getId())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(objectMapper.writeValueAsString(request)));
+
+        //Then : 응답 코드가 200 OK인지 확인합니다. 블로그 글 id로 조회한 후에 값이 수정되었는지 확인합니다.
+        result.andExpect(status().isOk());
+
+        Article article = blogRepository.findById(savedArticle.getId()).get();
+
+        assertThat(article.getTitle()).isEqualTo(newTitle);
+        assertThat(article.getContent()).isEqualTo(newContent);
     }
 }

@@ -1,11 +1,14 @@
 package me.yoonnable.springbootdeveloper.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import me.yoonnable.springbootdeveloper.domain.Article;
 import me.yoonnable.springbootdeveloper.dto.AddArticleRequest;
+import me.yoonnable.springbootdeveloper.dto.UpdateArticleRequest;
 import me.yoonnable.springbootdeveloper.repository.BlogRepository;
 import org.springframework.stereotype.Service;
 
+import java.beans.Transient;
 import java.util.List;
 
 @RequiredArgsConstructor // final이 붙거나 @NotNull이 붙은 필드의 생성자 추가 (lombok)
@@ -34,5 +37,16 @@ public class BlogService {
     //블로그 글 삭제 메서드
     public void delete(long id) {
         blogRepository.deleteById(id);
+    }
+
+    //블로그 글 수정 메서드
+    @Transactional // 트랜잭션 메서드
+    public Article update(long id, UpdateArticleRequest request) {
+        Article article = blogRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
+
+        article.update(request.getTitle(), request.getContent());
+
+        return article;
     }
 }
