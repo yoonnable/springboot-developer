@@ -2,7 +2,9 @@ package me.yoonnable.springbootdeveloper;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+@EnableJpaAuditing // created_at, updated_at 자동 업데이트
 @SpringBootApplication //spring boot의 기본 설정을 해준다
 public class SpringBootDeveloperApplication { //이 프로젝트에서 메인 클래스로 사용 할 것!!
     public static void main(String[] args) { //메인 메소드
