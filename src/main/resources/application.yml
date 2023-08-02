@@ -17,3 +17,7 @@ Spring:
   h2: # H2 콘솔 활성화
     console:
       enabled: true
+
+jwt:
+  issuer: ajufresh@gmail.com # 이슈 발급자
+  secret_key: study-springboot # 비밀키
