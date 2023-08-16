@@ -34,6 +34,9 @@ dependencies { //프로젝트를 개발하며 필요한 기능의 의존성을 �
     testImplementation 'org.projectlombok:lombok'
     implementation 'io.jsonwebtoken:jjwt:0.9.1' //자바 JWT 라이브러리
     implementation 'javax.xml.bind:jaxb-api:2.3.1' //XML 문서와 Java 객체 간 매핑 자동화
+
+    //OAuth2를 사용하기 위한 스타터 추가
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 }
 
 test {

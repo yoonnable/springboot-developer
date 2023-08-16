@@ -18,6 +18,13 @@ Spring:
     console:
       enabled: true
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 159863600293-jveqnig29ovpdl3cj8airtb31ruof8s6.apps.googleusercontent.com
+            client-secret: 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
 jwt:
   issuer: ajufresh@gmail.com # 이슈 발급자
   secret_key: study-springboot # 비밀키
