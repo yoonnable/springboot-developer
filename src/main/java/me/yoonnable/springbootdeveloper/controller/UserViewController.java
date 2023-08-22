@@ -8,7 +8,8 @@ public class UserViewController { // 로그인, 회원 가입 경로로 접근�
 
     @GetMapping("/login")
     public String login() {
-        return "login"; // 로그인 뷰 파일 이동
+//        return "login"; // 로그인 뷰 파일 이동
+        return "oauthLogin";
     }
 
     @GetMapping("/signup")

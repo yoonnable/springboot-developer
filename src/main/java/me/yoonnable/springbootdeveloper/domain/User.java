@@ -29,17 +29,25 @@ public class User implements UserDetails { // UserDetails를 상속받아 인증
     @Column(name = "password")
     private String password;
 
-    //OAuth 관련 키를 저장
-    // 사용자 이름
+    // 사용자 이름 (OAuth 관련)
     @Column(name = "nickname", unique = true)
     private String nickname;
 
     @Builder
-    public User(String email, String password, String auth, String nickname) {// OAuth 관련 : 파라미터에 nickname 추가
+    public User(String email, String password, String nickname) {// OAuth 관련 : 생성자 파라미터에 nickname 추가
         this.email = email;
         this.password = password;
         this.nickname = nickname;
     }
+
+    // OAuth 관련
+    // 사용자 이름 변경 (사용자 정보를 조회해 users 테이블에 사용자 정보가 있다면 리소스 서버에서 제공해주는 이름을 업데이트)
+    public User update(String nickname) {
+        this.nickname = nickname;
+
+        return this;
+    }
+
     
     // 권한 반환
     @Override
@@ -85,13 +93,5 @@ public class User implements UserDetails { // UserDetails를 상속받아 인증
     public boolean isEnabled() {
         // 계정이 사용 가능한지 확인하는 로직
         return true; //true -> 사용 가능
-    }
-
-    // OAuth 관련
-    // 사용자 이름 변경 (사용자 정보를 조회해 users 테이블에 사용자 정보가 있다면 리소스 서버에서 제공해주는 이름을 업데이트)
-    public User update(String nickname) {
-        this.nickname = nickname;
-
-        return this;
     }
 }

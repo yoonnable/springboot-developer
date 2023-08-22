@@ -8,7 +8,7 @@ import org.springframework.util.SerializationUtils;
 
 import java.util.Base64;
 
-public class CookieUtil {
+public class CookieUtil { // 쿠키 관리 클래스
     // 요청값(이름, 값, 만료 기간)을 바탕으로 HTTP 응답에 쿠키 추가
     public static void addCookie(HttpServletResponse response, String name, String value, int maxAge) {
         Cookie cookie = new Cookie(name, value);
